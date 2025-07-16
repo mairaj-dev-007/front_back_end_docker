@@ -4,6 +4,13 @@ function App() {
   const [message, setMessage] = useState(''); // ✅ This must be "setMessage"
 
   useEffect(() => {
+    fetch('http://localhost:7000/message')
+      .then(res => res.json())
+      .then(data => setMessage(data.message))
+      .catch(err => console.error(err));
+  }, []);
+
+  useEffect(() => {
     fetch("https://intern.web.musketeers.dev/api/message")
       .then(res => res.json())
       .then(data => setMessage(data.message)) // ✅ Matches above
